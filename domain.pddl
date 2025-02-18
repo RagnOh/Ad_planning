@@ -1,15 +1,15 @@
 (define(domain Sciame)
     (:requirements :strips :equality :typing :fluents :durative-actions :timed-initial-literals :numeric-fluents)
 
-    (:types Sciame Cella Drone_Ostile)
+    (:types Sciame Cella DroneOstile)
 
 (:predicates
    (at ?s - Sciame ?c-Cella)
    (connected ?c1 ?c2 -Cella)
-   (can_capture ?d - Drone_Ostile)
+   (can_capture ?d - DroneOstile)
    (is_input_cell ?c - Cella)
    (is_output_cell ?c -Cella)
-   (catturato ?d - Drone_Ostile)
+   (catturato ?d - DroneOstile)
 )
 
 (:functions
@@ -31,13 +31,13 @@
 )
 
  (:durative-action cattura
-   :parameters (?s - Sciame ?d-Drone_Ostile ?c_in - Cella ?c_out-Cella)
+   :parameters (?s - Sciame ?d - DroneOstile ?c_in - Cella ?c_out-Cella)
    :duration (= ?duration 10)
    :condition (and
      (at start (at ?s ?c_in))
      (at start (is_input_cell ?c_in))
      (at start (>= (vite_sciame ?s) 3))
-     (at start (can_capture ?d-Drone_Ostile))
+     (at start (can_capture ?d-DroneOstile))
    )
    :effect (and
       (at end (catturato ?d))
